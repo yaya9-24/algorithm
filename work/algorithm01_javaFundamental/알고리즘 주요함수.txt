@@ -1,0 +1,129 @@
+알고리즘 주요함수
+***jdk11 String 함수*************
+정수값만큼 문자열반복 : "*".repeat(5)
+공백제거 : strip메소드
+선행 공백과 후행 공백을 처리하는 메서드 stripLeading() 및 stripTrailing()
+문자열이 비어 있거나 공백만 포함하는 경우 true를 반환 메소드 : isBlank()
+문자열에서 추출된 라인 스트림을 라인 종결자(\n)로 구분하여 반환하는 메소드 : lines()
+빈 공백으로만 구성된 라인만 필터링
+System.out.println(multilineStr.lines().filter(String::isBlank).collect(Collectors.toList()));
+
+********************************
+문자열 길이 : str.length()
+문자열 추출 : str.subString(3)
+문자열 추출 : str.subString(3,5)
+문자열 위치 : str.indexOf("c")
+문자열 한글자뽑기 : str.charAt(0)
+문자열 뒤집기 : new StringBuffer(str).reverse().toString();
+문자열 char[] 변환 : str.toCharArray();
+배열 출력 : System.out.println(Arrays.toString(str.toCharArray()));
+
+문자열 비교 : 대소문자구별비교(equals()),대소문자 구별없이 비교(equalsIgnoreCase())
+
+문자열 대문자로 변경 : str1.toUpperCase()
+문자열 소문자로 변경 : str1.toLowerCase()
+//		System.out.println(str1.charAt(0));
+//		System.out.println(String.valueOf(str1.charAt(0)).equalsIgnoreCase(str2));
+//		System.out.println(str1.toUpperCase().charAt(0));
+//		System.out.println(str1.toLowerCase().charAt(0)==str2.charAt(0));
+
+문자열 정수 변환 : Integer.parseInt("10")
+기본타입 문자열 변화 : String.valueOf(10),String.valueOf('3')
+정수를 2진수,8진수,10진수 문자열 변환 :
+Integer.toString(sum);//26
+Integer.toString(sum,2);//11010 16+8+2
+Integer.toString(sum,8);//32  3*8+2
+
+정수 제곱 : (int)Math.pow(su, 2);
+
+
+큰수,큰정수 : BigInteger big = new BigInteger("26");
+			big = BigInteger.valueOf(26);
+문자열 구분자 >> 문자열배열	:	String[] arr = str.split(" ");
+문자열배열 구분자 문자열 : String answer = String.join(" ", arr);
+
+배열 출력 : System.out.println(Arrays.toString(sus));
+
+배열 순정렬 : 	Arrays.sort(sus);
+배열 뒤집기: List<String> list = Arrays.asList(arr);
+		Collections.reverse(list);
+순정렬 후에 뒤집기 사용하면 역정렬이됨.
+
+문자열 대소문자 확인 함수 : Character.isUpperCase(answer.charAt(0))
+
+스트림 필터 카운트 : list.stream().filter(i->i.equalsIgnoreCase(str2)).count()
+
+//스트림 사용 문자열배열 >> 정수배열
+		int[] sus = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray();
+//스트림 사용 정수배열 문자열배열
+		arr = Arrays.stream(sus).mapToObj(String::valueOf).toArray(String[]::new);
+
+//참고: 제곱근 sqrt(), 절대값 abs(), 소수점 버림 floor()
+		System.out.println(Math.sqrt(100));
+		System.out.println((int)Math.sqrt(100));
+		System.out.println(Math.abs(-100));
+		System.out.println(Math.floor(3.14));
+
+Set 스트림 최대값,최소값(max,min) :
+	primeNumbers.stream().mapToLong(i->i).max().getAsLong();
+	Arrays.stream(sums).max().getAsInt();
+컬렉션 최대값,최소값 : Collections.max(list)
+
+
+
+대칭수 검증메소드 정의
+	private static boolean isSymmetry(int su) {
+		String strSu = String.valueOf(su);
+		String leftStr = strSu.substring(0,strSu.length()/2);
+		String rightStr = strSu.substring(strSu.length()/2);
+		String reverseRightStr = new StringBuffer(rightStr).reverse().toString();
+//		System.out.println(leftStr +" "+ reverseRightStr);
+		return leftStr.equals(reverseRightStr);//90 90 : true
+	}
+
+
+
+List<String> list = Arrays.asList(str.split(" "));
+System.out.println(list);
+Collections.sort(list);//문자 정렬
+list.sort(Comparator.comparingInt(String::length));//단어 길이 정렬
+***객체정렬 해줄것
+
+
+//가장긴 단어가 무엇인지 알고 싶다면
+answer = list.stream().max(Comparator.comparing(String::length)).get();
+
+//가장긴 단어의 길이를 알고 싶다면
+System.out.println(list.stream().map(String::length).max(Integer::compare).get());
+
+스트림 문자열 변환
+answer = list.stream().collect(Collectors.joining());
+answer = list.stream().reduce("",String::concat);
+
+//1. 알파벳검증
+//	Character.isAlphabetic(0)
+// str.matches[^a-zA-Z]
+
+//2. 바꿔라 : str.replace(), str,replaceAll()
+
+
+//숫자 검증 : Character.isDigit(x)
+
+//최소 : Math.min()
+//출력 : String.join(" ",arr);//1 0 1 2 1 0 1 2 2 1 0
+
+//정수배열 합계
+int total = Arrays.stream(score).sum();
+
+//정수배열에서 평균을 구해라
+System.out.println((double)total/len);
+System.out.println(Arrays.stream(score).average().orElse(0));
+
+//배열 채우기
+int[] rank = new int[len];//0,0,0,...
+Arrays.fill(rank, 1);
+
+
+//***숫자로된 문자열 배열을 정수배열로 변환하기 2 - 스트림 사용
+int[] nums = Arrays.stream(arr)
+					.mapToInt(Integer::parseInt).toArray();

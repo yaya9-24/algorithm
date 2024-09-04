@@ -1,5 +1,6 @@
 package test2_operator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -17,17 +18,18 @@ public class Main2 {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         int count = s.nextInt();
-        int[] numbers = new int[count];
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            numbers[i] = s.nextInt();
+            list.add(s.nextInt());
         }
-        System.out.println(solution(numbers));
+        System.out.println(solution(list));
     }//end main
 
-    private static int solution(int...sus){
+    private static int solution(ArrayList<Integer> list){
+        //int answer = list.stream().mapToInt(x->x).sum();
         int answer = 0;
-        for (int i = 0; i < sus.length; i++) {
-            answer += sus[i];
+        for (Integer x : list){
+            answer += x;
         }
 
 
