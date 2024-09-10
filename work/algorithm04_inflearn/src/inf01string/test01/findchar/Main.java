@@ -9,7 +9,7 @@ public class Main {
 
         //String str = s.nextLine();
         //String input = s.nextLine();
-        String str = "Computercoolerccc";
+        String str = "Computercooler";
         String input = "c";
         String answer = solution(str,input);
         System.out.println(answer);
